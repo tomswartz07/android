@@ -16,12 +16,12 @@
  *
  */
 
-package com.owncloud.android.test;
+package com.sapphire.android.test;
 
 import android.test.AndroidTestCase;
 
-import com.owncloud.android.authentication.AccountUtils;
-import com.owncloud.android.utils.OwnCloudVersion;
+import com.sapphire.android.authentication.AccountUtils;
+import com.sapphire.android.utils.OwnCloudVersion;
 
 public class AccountUtilsTest extends AndroidTestCase {
     

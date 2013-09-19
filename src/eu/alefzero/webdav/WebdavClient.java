@@ -39,11 +39,11 @@ import org.apache.commons.httpclient.params.HttpMethodParams;
 import org.apache.http.HttpStatus;
 import org.apache.http.params.CoreProtocolPNames;
 
-import com.owncloud.android.Log_OC;
 
-import com.owncloud.android.authentication.AccountAuthenticator;
-import com.owncloud.android.network.BearerAuthScheme;
-import com.owncloud.android.network.BearerCredentials;
+import com.sapphire.android.Log_OC;
+import com.sapphire.android.authentication.AccountAuthenticator;
+import com.sapphire.android.network.BearerAuthScheme;
+import com.sapphire.android.network.BearerCredentials;
 
 import android.net.Uri;
 
