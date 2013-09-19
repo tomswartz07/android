@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">ownCloud</string>
+  <string name="app_name">Sapphire</string>
   <string name="main_password">Contrasinal:</string>
   <string name="main_login">Nome de usuario:</string>
   <string name="main_button_login">Acceso</string>
@@ -149,7 +149,7 @@
   <string name="media_event_done">Rematou a reprodución de %1$s</string>
   <string name="media_err_nothing_to_play">Non se atopan ficheiros multimedia</string>
   <string name="media_err_no_account">Non foi fornecida unha conta</string>
-  <string name="media_err_not_in_owncloud">O ficheiro non está nunha conta axeitada</string>
+  <string name="media_err_not_in_Sapphire">O ficheiro non está nunha conta axeitada</string>
   <string name="media_err_unsupported">Códec multimedia non admitido</string>
   <string name="media_err_io">Non é posíbel ler o ficheiro multimedia</string>
   <string name="media_err_malformed">O ficheiro multimedia non está codificado correctamente</string>

@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">ownCloud</string>
+  <string name="app_name">Sapphire</string>
   <string name="main_password">Passwort:</string>
   <string name="main_login">Benutzername:</string>
   <string name="main_button_login">Anmelden</string>
@@ -149,7 +149,7 @@
   <string name="media_event_done">%1$s Wiedergabe beendet</string>
   <string name="media_err_nothing_to_play">Keine Mediadatei gefunden</string>
   <string name="media_err_no_account">Kein Account angegeben</string>
-  <string name="media_err_not_in_owncloud">Datei nicht in einem gültigen Account</string>
+  <string name="media_err_not_in_Sapphire">Datei nicht in einem gültigen Account</string>
   <string name="media_err_unsupported">Nicht unterstützter Media-codec</string>
   <string name="media_err_io">Mediendatei konnte nicht gelesen werden</string>
   <string name="media_err_malformed">Mediendatei nicht korrekt kodiert</string>

@@ -1,10 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">ownCloud</string>
+  <string name="app_name">Sapphire</string>
   <string name="main_password">رمز عبور:</string>
   <string name="main_login">نام کاربری:</string>
   <string name="main_button_login">ورود</string>
-  <string name="main_welcome">به ownCloud خود خوش‌آمدید</string>
+  <string name="main_welcome">به Sapphire خود خوش‌آمدید</string>
   <string name="main_files">پرونده‌ها</string>
   <string name="main_music">موزیک</string>
   <string name="main_contacts">ارتباط‌ها</string>
@@ -12,7 +12,7 @@
   <string name="main_bookmarks">نشانک‌ها</string>
   <string name="main_settings">تنظیمات</string>
   <string name="main_tit_accsetup">نصب حساب کاربری</string>
-  <string name="main_wrn_accsetup">حساب کاربری ownCloud در دستگاه شما وجود ندارد. برای استفاده از این برنامه می‌بایست یکی ایجاد کنید.</string>
+  <string name="main_wrn_accsetup">حساب کاربری Sapphire در دستگاه شما وجود ندارد. برای استفاده از این برنامه می‌بایست یکی ایجاد کنید.</string>
   <string name="about_android">%1$s برنامه اندروید</string>
   <string name="about_version">%1$s نسخه</string>
   <string name="actionbar_sync">بازنمایی حساب کاربری</string>
@@ -145,7 +145,7 @@
   <string name="media_event_done">%1$s پخش به پایان رسید.</string>
   <string name="media_err_nothing_to_play">هیچ رسانه ای یافت نشد.</string>
   <string name="media_err_no_account">هیچ حسابی ارائه نشده است.</string>
-  <string name="media_err_not_in_owncloud">پرونده در حساب کاربری معتبر نیست.</string>
+  <string name="media_err_not_in_Sapphire">پرونده در حساب کاربری معتبر نیست.</string>
   <string name="media_err_unsupported">کدک رسانه پشتیبانی نشده است.</string>
   <string name="media_err_io">فایل رسانه نمیتواند خوانده شود.</string>
   <string name="media_err_malformed">فایل رسانه به شکل صحیح رمزگذاری نشده است.</string>

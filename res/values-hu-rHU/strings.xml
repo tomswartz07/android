@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">ownCloud</string>
+  <string name="app_name">Sapphire</string>
   <string name="main_password">Jelszó:</string>
   <string name="main_login">Felhasználói név:</string>
   <string name="main_button_login">Belépés</string>
@@ -149,7 +149,7 @@
   <string name="media_event_done">%1$s lejátszás véget ért</string>
   <string name="media_err_nothing_to_play">Nincs média fájl találat</string>
   <string name="media_err_no_account">Nincs felhasználói fiók</string>
-  <string name="media_err_not_in_owncloud">A fájl nincs egy felhasználó fiókban</string>
+  <string name="media_err_not_in_Sapphire">A fájl nincs egy felhasználó fiókban</string>
   <string name="media_err_unsupported">Nem támogatott média kodek</string>
   <string name="media_err_io">Media fájl nem olvasható</string>
   <string name="media_err_malformed">Médiafájl kódolása nem megfelelő</string>

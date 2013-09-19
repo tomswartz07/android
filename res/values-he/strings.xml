@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
-  <string name="app_name">ownCloud</string>
+  <string name="app_name">Sapphire</string>
   <string name="main_password">ססמה:</string>
   <string name="main_login">שם משתמש:</string>
   <string name="main_button_login">התחברות</string>
@@ -131,7 +131,7 @@
   <string name="media_state_loading">%1$s (בטעינה)</string>
   <string name="media_err_nothing_to_play">לא נמצא קובץ מדיה</string>
   <string name="media_err_no_account">לא צוין חשבון</string>
-  <string name="media_err_not_in_owncloud">הקובץ אינו בחשבון תקני</string>
+  <string name="media_err_not_in_Sapphire">הקובץ אינו בחשבון תקני</string>
   <string name="media_err_unsupported">מקודד המדיה אינו נתמך</string>
   <string name="media_err_io">לא ניתן לקרוא את קובץ המדיה</string>
   <string-array name="prefs_trackmydevice_intervall_keys">
