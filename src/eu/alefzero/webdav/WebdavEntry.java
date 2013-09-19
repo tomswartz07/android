@@ -16,6 +16,8 @@
  */
 package eu.alefzero.webdav;
 
+import gi.sapphire.android.Log_OC;
+
 import java.util.Date;
 
 import org.apache.jackrabbit.webdav.MultiStatusResponse;
@@ -23,7 +25,6 @@ import org.apache.jackrabbit.webdav.property.DavProperty;
 import org.apache.jackrabbit.webdav.property.DavPropertyName;
 import org.apache.jackrabbit.webdav.property.DavPropertySet;
 
-import com.sapphire.android.Log_OC;
 
 import android.net.Uri;
 

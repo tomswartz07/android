@@ -16,7 +16,7 @@
  */
 
 
-package com.sapphire.android.workaround.accounts;
+package gi.sapphire.android.workaround.accounts;
 
 import android.accounts.AbstractAccountAuthenticator;
 import android.accounts.Account;
@@ -33,7 +33,7 @@ import android.os.IBinder;
 public class AccountAuthenticatorService extends Service {
 
     private AccountAuthenticator mAuthenticator;
-    static final public String ACCOUNT_TYPE = "owncloud";
+    static final public String ACCOUNT_TYPE = "sapphire";
 
     @Override
     public void onCreate() {
@@ -63,7 +63,7 @@ public class AccountAuthenticatorService extends Service {
                 String[] requiredFeatures, Bundle options)
                 throws NetworkErrorException {
         	//Log.e("WORKAROUND", "Yes, WORKAROUND takes the control here");
-            final Intent intent = new Intent("com.sapphire.android.workaround.accounts.CREATE");
+            final Intent intent = new Intent("gi.sapphire.android.workaround.accounts.CREATE");
             intent.putExtra(AccountManager.KEY_ACCOUNT_AUTHENTICATOR_RESPONSE,
                     response);
             intent.putExtra(KEY_AUTH_TOKEN_TYPE, authTokenType);

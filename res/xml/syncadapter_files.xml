@@ -22,7 +22,7 @@
 <!-- for the SyncAdapter. -->
 
 <sync-adapter xmlns:android="http://schemas.android.com/apk/res/android"
-    android:contentAuthority="com.sapphire"
+    android:contentAuthority="gi.sapphire"
     android:accountType="sapphire"
     android:supportsUploading="true"
 />

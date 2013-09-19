@@ -18,6 +18,11 @@
 
 package eu.alefzero.webdav;
 
+import gi.sapphire.android.Log_OC;
+import gi.sapphire.android.authentication.AccountAuthenticator;
+import gi.sapphire.android.network.BearerAuthScheme;
+import gi.sapphire.android.network.BearerCredentials;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -40,10 +45,6 @@ import org.apache.http.HttpStatus;
 import org.apache.http.params.CoreProtocolPNames;
 
 
-import com.sapphire.android.Log_OC;
-import com.sapphire.android.authentication.AccountAuthenticator;
-import com.sapphire.android.network.BearerAuthScheme;
-import com.sapphire.android.network.BearerCredentials;
 
 import android.net.Uri;
 
