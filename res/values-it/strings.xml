@@ -149,7 +149,7 @@
   <string name="media_event_done">Riproduzione di %1$s terminata</string>
   <string name="media_err_nothing_to_play">Nessun file multimediale trovato</string>
   <string name="media_err_no_account">Nessun account fornito</string>
-  <string name="media_err_not_in_Sapphire">Il file non è in un account valido</string>
+  <string name="media_err_not_in_owncloud">Il file non è in un account valido</string>
   <string name="media_err_unsupported">Codificatore multimediale non supportato</string>
   <string name="media_err_io">Il file multimediale non può essere letto</string>
   <string name="media_err_malformed">File multimediale non codificato correttamente</string>

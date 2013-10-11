@@ -145,7 +145,7 @@
   <string name="media_event_done">%1$s پخش به پایان رسید.</string>
   <string name="media_err_nothing_to_play">هیچ رسانه ای یافت نشد.</string>
   <string name="media_err_no_account">هیچ حسابی ارائه نشده است.</string>
-  <string name="media_err_not_in_Sapphire">پرونده در حساب کاربری معتبر نیست.</string>
+  <string name="media_err_not_in_owncloud">پرونده در حساب کاربری معتبر نیست.</string>
   <string name="media_err_unsupported">کدک رسانه پشتیبانی نشده است.</string>
   <string name="media_err_io">فایل رسانه نمیتواند خوانده شود.</string>
   <string name="media_err_malformed">فایل رسانه به شکل صحیح رمزگذاری نشده است.</string>

@@ -149,7 +149,7 @@
   <string name="media_event_done">%1$s プレイバック終了</string>
   <string name="media_err_nothing_to_play">メディアファイルが見つかりませんでした</string>
   <string name="media_err_no_account">アカウントが提供されていません</string>
-  <string name="media_err_not_in_Sapphire">ファイルが有効なアカウントにありません</string>
+  <string name="media_err_not_in_owncloud">ファイルが有効なアカウントにありません</string>
   <string name="media_err_unsupported">サポートされていないメディアコーデック</string>
   <string name="media_err_io">メディアファイルを読み込めませんでした</string>
   <string name="media_err_malformed">メディアファイルが正確にエンコードされていません</string>

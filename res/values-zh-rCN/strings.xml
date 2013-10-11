@@ -144,7 +144,7 @@
   <string name="media_event_done">%1$s 播放完毕</string>
   <string name="media_err_nothing_to_play">没有发现播放文件</string>
   <string name="media_err_no_account">未提供账号</string>
-  <string name="media_err_not_in_Sapphire">文件不在合法账户</string>
+  <string name="media_err_not_in_owncloud">文件不在合法账户</string>
   <string name="media_err_unsupported">不支持的编码格式</string>
   <string name="media_err_io">文件不可读</string>
   <string name="media_err_malformed">文件编码错误</string>

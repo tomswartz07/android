@@ -140,7 +140,7 @@
   <string name="media_event_done">%1$s prehrávanie dokončené</string>
   <string name="media_err_nothing_to_play">Nenájdený žiaden multimediálny súbor</string>
   <string name="media_err_no_account">Účet neposkytnutý</string>
-  <string name="media_err_not_in_Sapphire">Súbor nie je v platnom účte</string>
+  <string name="media_err_not_in_owncloud">Súbor nie je v platnom účte</string>
   <string name="media_err_unsupported">Nepodporovaný kodek</string>
   <string name="media_err_io">Mediálny súbor nemožno čítať</string>
   <string name="media_err_malformed">Mediálny súbor nemá správne kódovanie</string>

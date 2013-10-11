@@ -148,7 +148,7 @@
   <string name="media_event_done">%1$s erreprodukzioa amaitua</string>
   <string name="media_err_nothing_to_play">Ez da euskarri fitxategia aurkitu</string>
   <string name="media_err_no_account">Ez da konturik eman</string>
-  <string name="media_err_not_in_Sapphire">Fitxategiak ez du baliozko kontu bat</string>
+  <string name="media_err_not_in_owncloud">Fitxategiak ez du baliozko kontu bat</string>
   <string name="media_err_unsupported">Onartzen ez de euskarri kodeka</string>
   <string name="media_err_io">Euskarri fitxategia ezin da bihurtu</string>
   <string name="media_err_malformed">Euskarri fitxategia ezin da kodetu</string>

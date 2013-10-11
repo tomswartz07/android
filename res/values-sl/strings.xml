@@ -137,7 +137,7 @@
   <string name="media_state_loading">%1$s (nalaganja)</string>
   <string name="media_err_nothing_to_play">Medijskih datotek ni bilo mogoče najti</string>
   <string name="media_err_no_account">Niste navedli uporabniškega računa</string>
-  <string name="media_err_not_in_Sapphire">Dokument ni shranjen pod veljaven račun.</string>
+  <string name="media_err_not_in_owncloud">Dokument ni shranjen pod veljaven račun.</string>
   <string name="media_err_unsupported">Medijski kodek ni podprt</string>
   <string name="media_err_io">Medijske datoteke ni bilo mogoče prebrati.</string>
   <string name="media_err_malformed">Medijska datoteka ni pravilno kodirana.</string>

@@ -149,7 +149,7 @@
   <string name="media_event_done">%1$s esitus lõpetatud</string>
   <string name="media_err_nothing_to_play">Meedia faili ei leitud</string>
   <string name="media_err_no_account">Ühtegi kontot pole antud</string>
-  <string name="media_err_not_in_Sapphire">Fail ei kuulu õigele kontole</string>
+  <string name="media_err_not_in_owncloud">Fail ei kuulu õigele kontole</string>
   <string name="media_err_unsupported">Mittetoetatud meedia koodek</string>
   <string name="media_err_io">Ei suuda lugeda meediafaili</string>
   <string name="media_err_malformed">Meediafail pole korralikult kodeeritud</string>

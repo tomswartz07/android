@@ -149,7 +149,7 @@
   <string name="media_event_done">%1$s spelat färdigt</string>
   <string name="media_err_nothing_to_play">Hittar ingen medie-fil</string>
   <string name="media_err_no_account">Inget konto är angivet</string>
-  <string name="media_err_not_in_Sapphire">Filen finns i ett ogiltigt konto</string>
+  <string name="media_err_not_in_owncloud">Filen finns i ett ogiltigt konto</string>
   <string name="media_err_unsupported">Saknar stöd för denna mediatyp</string>
   <string name="media_err_io">Mediafil kunde inte skapas</string>
   <string name="media_err_malformed">Mediafilen är felaktigt kodad</string>

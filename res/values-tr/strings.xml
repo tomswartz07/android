@@ -134,7 +134,7 @@
   <string name="media_state_loading">%1$s (yükleniyor)</string>
   <string name="media_event_done">%1$s yeniden oynatım sonlandırıldı</string>
   <string name="media_err_nothing_to_play">Herhangi bir medya öğesi bulunamadı</string>
-  <string name="media_err_not_in_Sapphire">Dosya doğru bir hesapta değil</string>
+  <string name="media_err_not_in_owncloud">Dosya doğru bir hesapta değil</string>
   <string name="media_err_unsupported">Codec desteklenmiyor</string>
   <string name="media_err_io">Medya öğesi okunamadı</string>
   <string name="media_err_malformed">Medya öğesi doğru bir şekilde kodlanmadı</string>

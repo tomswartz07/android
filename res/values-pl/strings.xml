@@ -149,7 +149,7 @@
   <string name="media_event_done">%1$s odtwarzanie zakończone</string>
   <string name="media_err_nothing_to_play">Nie znaleziono plików multimedialnych</string>
   <string name="media_err_no_account">Nie znaleziono konta</string>
-  <string name="media_err_not_in_Sapphire">Plik na nieprawidłowym koncie</string>
+  <string name="media_err_not_in_owncloud">Plik na nieprawidłowym koncie</string>
   <string name="media_err_unsupported">Nieobsługiwany kodek multimediów</string>
   <string name="media_err_io">Błąd odczytu pliku multimedialnego</string>
   <string name="media_err_malformed">Błąd kodowania pliku multimedialnego</string>

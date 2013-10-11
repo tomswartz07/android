@@ -149,7 +149,7 @@
   <string name="media_event_done">%1$s playback geëindigd</string>
   <string name="media_err_nothing_to_play">Geen mediabestand gevonden</string>
   <string name="media_err_no_account">Geen account opgegeven</string>
-  <string name="media_err_not_in_Sapphire">Bestand niet in een geldig account</string>
+  <string name="media_err_not_in_owncloud">Bestand niet in een geldig account</string>
   <string name="media_err_unsupported">Niet ondersteunde media codec</string>
   <string name="media_err_io">Mediabestand kon niet worden gelezen</string>
   <string name="media_err_malformed">Mediabestand niet goed gecodeerd</string>

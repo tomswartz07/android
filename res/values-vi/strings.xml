@@ -148,7 +148,7 @@
   <string name="media_event_done">%1$s đã hoàn tất chế độ phát lại</string>
   <string name="media_err_nothing_to_play">Không tìm thấy tập tin media nào</string>
   <string name="media_err_no_account">Vẫn chưa cung cấp tài khoản nào</string>
-  <string name="media_err_not_in_Sapphire">Tập tin không nằm trong tài khoản hợp lệ</string>
+  <string name="media_err_not_in_owncloud">Tập tin không nằm trong tài khoản hợp lệ</string>
   <string name="media_err_unsupported">Codec của media không được hỗ trợ</string>
   <string name="media_err_io">Không thể đọc dữ liệu từ tập tin media</string>
   <string name="media_err_malformed">Tập tin media không được mã hóa đúng quy định</string>

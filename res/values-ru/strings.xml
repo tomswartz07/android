@@ -149,7 +149,7 @@
   <string name="media_event_done">%1$s воспроизведение завершено</string>
   <string name="media_err_nothing_to_play">Не найден медиа-файл</string>
   <string name="media_err_no_account">Не настроена учётная запись</string>
-  <string name="media_err_not_in_Sapphire">Файл в неверной учётной записи</string>
+  <string name="media_err_not_in_owncloud">Файл в неверной учётной записи</string>
   <string name="media_err_unsupported">Неподдерживаемый кодек</string>
   <string name="media_err_io">Файл не может быть прочитан</string>
   <string name="media_err_malformed">Файл </string>

@@ -149,7 +149,7 @@
   <string name="media_event_done">%1$s afspilning færdig</string>
   <string name="media_err_nothing_to_play">Mediefil ikke fundet</string>
   <string name="media_err_no_account">Ingen konto angivet</string>
-  <string name="media_err_not_in_Sapphire">Fil er ikke en gyldig konto</string>
+  <string name="media_err_not_in_owncloud">Fil er ikke en gyldig konto</string>
   <string name="media_err_unsupported">Ikke-understøttet medie codec</string>
   <string name="media_err_io">Mediefilen kunne ikke læses</string>
   <string name="media_err_malformed">Mediefilen er ikke korrekt kodet</string>

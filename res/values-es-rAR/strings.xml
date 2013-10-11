@@ -149,7 +149,7 @@
   <string name="media_event_done">%1$s reproducción finalizada</string>
   <string name="media_err_nothing_to_play">No se encuentra archivo de medio</string>
   <string name="media_err_no_account">No se proporcionó cuenta</string>
-  <string name="media_err_not_in_Sapphire">El archivo no está en una cuenta válida </string>
+  <string name="media_err_not_in_owncloud">El archivo no está en una cuenta válida </string>
   <string name="media_err_unsupported">Codec no soportado</string>
   <string name="media_err_io">El archivo de medios no pudo ser leído </string>
   <string name="media_err_malformed">Archivo no está correctamente codificado</string>

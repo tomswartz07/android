@@ -146,7 +146,7 @@
   <string name="media_event_done">%1$s pourcentage de lecture finie</string>
   <string name="media_err_nothing_to_play">Fichier média introuvable </string>
   <string name="media_err_no_account">Aucun compte n\'a été trouvé</string>
-  <string name="media_err_not_in_Sapphire">Le fichier n\'est pas dans un compte valide</string>
+  <string name="media_err_not_in_owncloud">Le fichier n\'est pas dans un compte valide</string>
   <string name="media_err_unsupported">Le codec de ce média n\'est pas supporté </string>
   <string name="media_err_io">Le fichier média ne peut pas être lu</string>
   <string name="media_err_malformed">Le fichier média n\'est pas correctement encodé</string>
