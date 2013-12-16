@@ -28,23 +28,23 @@ import java.util.Vector;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import com.owncloud.android.Log_OC;
-import com.owncloud.android.MainApp;
 import com.owncloud.android.R;
 import com.owncloud.android.authentication.AuthenticatorActivity;
 import com.owncloud.android.datamodel.FileDataStorageManager;
 import com.owncloud.android.datamodel.OCFile;
-import com.owncloud.android.network.OwnCloudClientUtils;
+
+import com.owncloud.android.oc_framework.network.webdav.OnDatatransferProgressListener;
+import com.owncloud.android.oc_framework.network.webdav.OwnCloudClientFactory;
+import com.owncloud.android.oc_framework.network.webdav.WebdavClient;
 import com.owncloud.android.operations.DownloadFileOperation;
-import com.owncloud.android.operations.RemoteOperationResult;
-import com.owncloud.android.operations.RemoteOperationResult.ResultCode;
+import com.owncloud.android.oc_framework.operations.RemoteOperationResult;
+import com.owncloud.android.oc_framework.operations.RemoteOperationResult.ResultCode;
 import com.owncloud.android.ui.activity.FileActivity;
 import com.owncloud.android.ui.activity.FileDisplayActivity;
 import com.owncloud.android.ui.preview.PreviewImageActivity;
 import com.owncloud.android.ui.preview.PreviewImageFragment;
-
-import eu.alefzero.webdav.OnDatatransferProgressListener;
-
+import com.owncloud.android.utils.DisplayUtils;
+import com.owncloud.android.utils.Log_OC;
 
 import android.accounts.Account;
 import android.accounts.AccountsException;
@@ -61,8 +61,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.Process;
 import android.widget.RemoteViews;
-
-import eu.alefzero.webdav.WebdavClient;
 
 public class FileDownloader extends Service implements OnDatatransferProgressListener {
     
@@ -355,7 +353,7 @@ public class FileDownloader extends Service implements OnDatatransferProgressLis
                 if (mDownloadClient == null || !mLastAccount.equals(mCurrentDownload.getAccount())) {
                     mLastAccount = mCurrentDownload.getAccount();
                     mStorageManager = new FileDataStorageManager(mLastAccount, getContentResolver());
-                    mDownloadClient = OwnCloudClientUtils.createOwnCloudClient(mLastAccount, getApplicationContext());
+                    mDownloadClient = OwnCloudClientFactory.createOwnCloudClient(mLastAccount, getApplicationContext());
                 }
 
                 /// perform the download
@@ -412,12 +410,12 @@ public class FileDownloader extends Service implements OnDatatransferProgressLis
     private void notifyDownloadStart(DownloadFileOperation download) {
         /// create status notification with a progress bar
         mLastPercent = 0;
-        mNotification = new Notification(R.drawable.icon, getString(R.string.downloader_download_in_progress_ticker), System.currentTimeMillis());
+        mNotification = new Notification(DisplayUtils.getSeasonalIconId(), getString(R.string.downloader_download_in_progress_ticker), System.currentTimeMillis());
         mNotification.flags |= Notification.FLAG_ONGOING_EVENT;
         mNotification.contentView = new RemoteViews(getApplicationContext().getPackageName(), R.layout.progressbar_layout);
         mNotification.contentView.setProgressBar(R.id.status_progress, 100, 0, download.getSize() < 0);
         mNotification.contentView.setTextViewText(R.id.status_text, String.format(getString(R.string.downloader_download_in_progress_content), 0, new File(download.getSavePath()).getName()));
-        mNotification.contentView.setImageViewResource(R.id.status_icon, R.drawable.icon);
+        mNotification.contentView.setImageViewResource(R.id.status_icon, DisplayUtils.getSeasonalIconId());
         
         /// includes a pending intent in the notification showing the details view of the file
         Intent showDetailsIntent = null;
@@ -471,12 +469,13 @@ public class FileDownloader extends Service implements OnDatatransferProgressLis
         if (!downloadResult.isCancelled()) {
             int tickerId = (downloadResult.isSuccess()) ? R.string.downloader_download_succeeded_ticker : R.string.downloader_download_failed_ticker;
             int contentId = (downloadResult.isSuccess()) ? R.string.downloader_download_succeeded_content : R.string.downloader_download_failed_content;
-            Notification finalNotification = new Notification(R.drawable.icon, getString(tickerId), System.currentTimeMillis());
+            Notification finalNotification = new Notification(DisplayUtils.getSeasonalIconId(), getString(tickerId), System.currentTimeMillis());
             finalNotification.flags |= Notification.FLAG_AUTO_CANCEL;
             boolean needsToUpdateCredentials = (downloadResult.getCode() == ResultCode.UNAUTHORIZED ||
                                                 // (downloadResult.isTemporalRedirection() && downloadResult.isIdPRedirection()
                                                   (downloadResult.isIdPRedirection()
-                                                        && MainApp.getAuthTokenTypeSamlSessionCookie().equals(mDownloadClient.getAuthTokenType())));
+                                                        && mDownloadClient.getCredentials() == null));
+                                                        //&& MainApp.getAuthTokenTypeSamlSessionCookie().equals(mDownloadClient.getAuthTokenType())));
             if (needsToUpdateCredentials) {
                 // let the user update credentials with one click
                 Intent updateAccountCredentials = new Intent(this, AuthenticatorActivity.class);

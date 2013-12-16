@@ -43,8 +43,6 @@ import android.widget.Toast;
 import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
-import com.owncloud.android.DisplayUtils;
-import com.owncloud.android.Log_OC;
 import com.owncloud.android.R;
 import com.owncloud.android.datamodel.FileDataStorageManager;
 import com.owncloud.android.datamodel.OCFile;
@@ -52,22 +50,23 @@ import com.owncloud.android.files.services.FileObserverService;
 import com.owncloud.android.files.services.FileUploader;
 import com.owncloud.android.files.services.FileDownloader.FileDownloaderBinder;
 import com.owncloud.android.files.services.FileUploader.FileUploaderBinder;
-import com.owncloud.android.operations.OnRemoteOperationListener;
-import com.owncloud.android.operations.RemoteOperation;
-import com.owncloud.android.operations.RemoteOperationResult;
+import com.owncloud.android.oc_framework.network.webdav.OnDatatransferProgressListener;
+import com.owncloud.android.oc_framework.operations.OnRemoteOperationListener;
+import com.owncloud.android.oc_framework.operations.RemoteOperation;
+import com.owncloud.android.oc_framework.operations.RemoteOperationResult;
+import com.owncloud.android.oc_framework.operations.RemoteOperationResult.ResultCode;
 import com.owncloud.android.operations.RemoveFileOperation;
 import com.owncloud.android.operations.RenameFileOperation;
 import com.owncloud.android.operations.SynchronizeFileOperation;
-import com.owncloud.android.operations.RemoteOperationResult.ResultCode;
 import com.owncloud.android.ui.activity.ConflictsResolveActivity;
 import com.owncloud.android.ui.activity.FileActivity;
 import com.owncloud.android.ui.activity.FileDisplayActivity;
 import com.owncloud.android.ui.dialog.EditNameDialog;
 import com.owncloud.android.ui.dialog.EditNameDialog.EditNameDialogListener;
 import com.owncloud.android.ui.preview.PreviewImageFragment;
+import com.owncloud.android.utils.DisplayUtils;
+import com.owncloud.android.utils.Log_OC;
 
-
-import eu.alefzero.webdav.OnDatatransferProgressListener;
 
 /**
  * This Fragment is used to display the details about a file.
@@ -474,12 +473,10 @@ public class FileDetailFragment extends FileFragment implements
     
     @Override
     public void onNeutral(String callerTag) {
-        File f = null;
         OCFile file = getFile();
-        if (file.isDown() && (f = new File(file.getStoragePath())).exists()) {
-            f.delete();
+        mStorageManager.removeFile(file, false, true);    // TODO perform in background task / new thread
+        if (file.getStoragePath() != null) {
             file.setStoragePath(null);
-            mStorageManager.saveFile(file);
             updateFileDetails(file, mAccount);
         }
     }
@@ -817,6 +814,9 @@ public class FileDetailFragment extends FileFragment implements
                 Toast msg = Toast.makeText(getActivity(), R.string.rename_local_fail_msg, Toast.LENGTH_LONG); 
                 msg.show();
                 // TODO throw again the new rename dialog
+            } if (result.getCode().equals(ResultCode.INVALID_CHARACTER_IN_NAME)) {
+                Toast msg = Toast.makeText(getActivity(), R.string.filename_forbidden_characters, Toast.LENGTH_LONG);
+                msg.show();
             } else {
                 Toast msg = Toast.makeText(getActivity(), R.string.rename_server_fail_msg, Toast.LENGTH_LONG); 
                 msg.show();

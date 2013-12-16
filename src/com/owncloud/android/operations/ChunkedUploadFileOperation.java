@@ -27,20 +27,20 @@ import java.util.Random;
 import org.apache.commons.httpclient.HttpException;
 import org.apache.commons.httpclient.methods.PutMethod;
 
-import com.owncloud.android.Log_OC;
 import com.owncloud.android.datamodel.OCFile;
-import com.owncloud.android.network.ProgressiveDataTransferer;
+import com.owncloud.android.oc_framework.network.ProgressiveDataTransferer;
+import com.owncloud.android.oc_framework.network.webdav.ChunkFromFileChannelRequestEntity;
+import com.owncloud.android.oc_framework.network.webdav.WebdavClient;
+import com.owncloud.android.oc_framework.network.webdav.WebdavUtils;
+import com.owncloud.android.utils.Log_OC;
 
 
 import android.accounts.Account;
 
-import eu.alefzero.webdav.ChunkFromFileChannelRequestEntity;
-import eu.alefzero.webdav.WebdavClient;
-import eu.alefzero.webdav.WebdavUtils;
 
 public class ChunkedUploadFileOperation extends UploadFileOperation {
     
-    private static final long CHUNK_SIZE = 1024000;
+    public static final long CHUNK_SIZE = 1024000;
     private static final String OC_CHUNKED_HEADER = "OC-Chunked";
     private static final String TAG = ChunkedUploadFileOperation.class.getSimpleName();
 

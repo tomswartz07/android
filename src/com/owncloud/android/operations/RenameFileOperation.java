@@ -20,20 +20,18 @@ package com.owncloud.android.operations;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.jackrabbit.webdav.client.methods.DavMethodBase;
-
-import com.owncloud.android.Log_OC;
 import com.owncloud.android.datamodel.FileDataStorageManager;
 import com.owncloud.android.datamodel.OCFile;
-import com.owncloud.android.operations.RemoteOperationResult.ResultCode;
+import com.owncloud.android.oc_framework.network.webdav.WebdavClient;
+import com.owncloud.android.oc_framework.operations.RemoteOperation;
+import com.owncloud.android.oc_framework.operations.RemoteOperationResult;
+import com.owncloud.android.oc_framework.operations.RemoteOperationResult.ResultCode;
+import com.owncloud.android.oc_framework.operations.remote.RenameRemoteFileOperation;
 import com.owncloud.android.utils.FileStorageUtils;
-//import org.apache.jackrabbit.webdav.client.methods.MoveMethod;
+import com.owncloud.android.utils.Log_OC;
 
 import android.accounts.Account;
 
-
-import eu.alefzero.webdav.WebdavClient;
-import eu.alefzero.webdav.WebdavUtils;
 
 /**
  * Remote operation performing the rename of a remote file (or folder?) in the ownCloud server.
@@ -43,9 +41,6 @@ import eu.alefzero.webdav.WebdavUtils;
 public class RenameFileOperation extends RemoteOperation {
     
     private static final String TAG = RenameFileOperation.class.getSimpleName();
-
-    private static final int RENAME_READ_TIMEOUT = 10000;
-    private static final int RENAME_CONNECTION_TIMEOUT = 5000;
     
 
     private OCFile mFile;
@@ -85,69 +80,41 @@ public class RenameFileOperation extends RemoteOperation {
     protected RemoteOperationResult run(WebdavClient client) {
         RemoteOperationResult result = null;
         
-        LocalMoveMethod move = null;
-        mNewRemotePath = null;
+        // check if the new name is valid in the local file system
         try {
-            if (mNewName.equals(mFile.getFileName())) {
-                return new RemoteOperationResult(ResultCode.OK);
+            if (!isValidNewName()) {
+                return new RemoteOperationResult(ResultCode.INVALID_LOCAL_FILE_NAME);
             }
-        
             String parent = (new File(mFile.getRemotePath())).getParent();
             parent = (parent.endsWith(OCFile.PATH_SEPARATOR)) ? parent : parent + OCFile.PATH_SEPARATOR; 
             mNewRemotePath =  parent + mNewName;
             if (mFile.isFolder()) {
                 mNewRemotePath += OCFile.PATH_SEPARATOR;
             }
-            
-            // check if the new name is valid in the local file system
-            if (!isValidNewName()) {
-                return new RemoteOperationResult(ResultCode.INVALID_LOCAL_FILE_NAME);
-            }
-        
-            // check if a file with the new name already exists
-            if (client.existsFile(mNewRemotePath) ||                             // remote check could fail by network failure. by indeterminate behavior of HEAD for folders ... 
-                    mStorageManager.getFileByPath(mNewRemotePath) != null) {     // ... so local check is convenient
+
+            // ckeck local overwrite
+            if (mStorageManager.getFileByPath(mNewRemotePath) != null) {
                 return new RemoteOperationResult(ResultCode.INVALID_OVERWRITE);
             }
-            move = new LocalMoveMethod( client.getBaseUri() + WebdavUtils.encodePath(mFile.getRemotePath()),
-                                        client.getBaseUri() + WebdavUtils.encodePath(mNewRemotePath));
-            int status = client.executeMethod(move, RENAME_READ_TIMEOUT, RENAME_CONNECTION_TIMEOUT);
-            if (move.succeeded()) {
+            
+            RenameRemoteFileOperation operation = new RenameRemoteFileOperation(mFile.getFileName(), mFile.getRemotePath(), 
+                    mNewName, mFile.isFolder());
+            result = operation.execute(client);
 
+            if (result.isSuccess()) {
                 if (mFile.isFolder()) {
                     saveLocalDirectory();
-                    
+
                 } else {
                     saveLocalFile();
-                    
                 }
-             
-            /* 
-             *} else if (mFile.isDirectory() && (status == 207 || status >= 500)) {
-             *   // TODO 
-             *   // if server fails in the rename of a folder, some children files could have been moved to a folder with the new name while some others
-             *   // stayed in the old folder;
-             *   //
-             *   // easiest and heaviest solution is synchronizing the parent folder (or the full account);
-             *   //
-             *   // a better solution is synchronizing the folders with the old and new names;
-             *}
-             */
-                
             }
             
-            move.getResponseBodyAsString(); // exhaust response, although not interesting
-            result = new RemoteOperationResult(move.succeeded(), status, move.getResponseHeaders());
-            Log_OC.i(TAG, "Rename " + mFile.getRemotePath() + " to " + mNewRemotePath + ": " + result.getLogMessage());
-            
-        } catch (Exception e) {
-            result = new RemoteOperationResult(e);
-            Log_OC.e(TAG, "Rename " + mFile.getRemotePath() + " to " + ((mNewRemotePath==null) ? mNewName : mNewRemotePath) + ": " + result.getLogMessage(), e);
-            
-        } finally {
-            if (move != null)
-                move.releaseConnection();
+        } catch (IOException e) {
+            Log_OC.e(TAG, "Rename " + mFile.getRemotePath() + " to " + ((mNewRemotePath==null) ? mNewName : mNewRemotePath) + ": " + 
+                    ((result!= null) ? result.getLogMessage() : ""), e);
         }
+
         return result;
     }
 
@@ -222,27 +189,5 @@ public class RenameFileOperation extends RemoteOperation {
         
         return result;
     }
-
-
-    // move operation
-    private class LocalMoveMethod extends DavMethodBase {
-
-        public LocalMoveMethod(String uri, String dest) {
-            super(uri);
-            addRequestHeader(new org.apache.commons.httpclient.Header("Destination", dest));
-        }
-
-        @Override
-        public String getName() {
-            return "MOVE";
-        }
-
-        @Override
-        protected boolean isSuccess(int status) {
-            return status == 201 || status == 204;
-        }
-            
-    }
-    
 
 }

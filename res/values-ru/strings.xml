@@ -175,6 +175,7 @@
   <string name="sync_file_fail_msg">Удаленный файл не может быть проверен</string>
   <string name="sync_file_nothing_to_do_msg">Содержимое файла уже синхронизировано</string>
   <string name="create_dir_fail_msg">Директория не может быть создана</string>
+  <string name="filename_forbidden_characters">Запрещённые символы: / \\ &lt; &gt; : \" | ? *</string>
   <string name="wait_a_moment">Подождите немного</string>
   <string name="filedisplay_unexpected_bad_get_content">Неизвестная ошибка; попробуйте другое приложение для выбора файла</string>
   <string name="filedisplay_no_file_selected">Файлы не выбраны</string>

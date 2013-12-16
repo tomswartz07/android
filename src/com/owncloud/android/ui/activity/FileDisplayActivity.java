@@ -31,7 +31,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.IntentFilter.AuthorityEntry;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.SyncRequest;
@@ -59,7 +58,6 @@ import com.actionbarsherlock.view.Menu;
 import com.actionbarsherlock.view.MenuInflater;
 import com.actionbarsherlock.view.MenuItem;
 import com.actionbarsherlock.view.Window;
-import com.owncloud.android.Log_OC;
 import com.owncloud.android.MainApp;
 import com.owncloud.android.R;
 import com.owncloud.android.datamodel.FileDataStorageManager;
@@ -70,10 +68,10 @@ import com.owncloud.android.files.services.FileUploader;
 import com.owncloud.android.files.services.FileDownloader.FileDownloaderBinder;
 import com.owncloud.android.files.services.FileUploader.FileUploaderBinder;
 import com.owncloud.android.operations.CreateFolderOperation;
-import com.owncloud.android.operations.OnRemoteOperationListener;
-import com.owncloud.android.operations.RemoteOperation;
-import com.owncloud.android.operations.RemoteOperationResult;
-import com.owncloud.android.operations.RemoteOperationResult.ResultCode;
+import com.owncloud.android.oc_framework.operations.OnRemoteOperationListener;
+import com.owncloud.android.oc_framework.operations.RemoteOperation;
+import com.owncloud.android.oc_framework.operations.RemoteOperationResult;
+import com.owncloud.android.oc_framework.operations.RemoteOperationResult.ResultCode;
 import com.owncloud.android.operations.RemoveFileOperation;
 import com.owncloud.android.operations.RenameFileOperation;
 import com.owncloud.android.operations.SynchronizeFileOperation;
@@ -90,6 +88,8 @@ import com.owncloud.android.ui.fragment.OCFileListFragment;
 import com.owncloud.android.ui.preview.PreviewImageActivity;
 import com.owncloud.android.ui.preview.PreviewMediaFragment;
 import com.owncloud.android.ui.preview.PreviewVideoActivity;
+import com.owncloud.android.utils.DisplayUtils;
+import com.owncloud.android.utils.Log_OC;
 
 
 /**
@@ -193,13 +193,16 @@ OCFileListFragment.ContainerActivity, FileDetailFragment.ContainerActivity, OnNa
         // Action bar setup
         mDirectories = new CustomArrayAdapter<String>(this, R.layout.sherlock_spinner_dropdown_item);
         getSupportActionBar().setHomeButtonEnabled(true);       // mandatory since Android ICS, according to the official documentation
-        setSupportProgressBarIndeterminateVisibility(mSyncInProgress);    // always AFTER setContentView(...) ; to work around bug in its implementation        
-        
-        
+        setSupportProgressBarIndeterminateVisibility(mSyncInProgress);    // always AFTER setContentView(...) ; to work around bug in its implementation
         
         Log_OC.d(TAG, "onCreate() end");
     }
-
+    
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getSupportActionBar().setIcon(DisplayUtils.getSeasonalIconId());
+    }
 
     @Override
     protected void onDestroy() {
@@ -1152,19 +1155,6 @@ OCFileListFragment.ContainerActivity, FileDetailFragment.ContainerActivity, OnNa
     }
 
 
-//    private void updateDisplayHomeAtSync(){
-//        ActionBar actionBar = getSupportActionBar();
-//        OCFile currentDir = getCurrentDir();
-//        if (currentDir.getParentId() != DataStorageManager.ROOT_PARENT_ID) {
-//            actionBar.setHomeButtonEnabled(!mSyncInProgress);
-//            actionBar.setDisplayHomeAsUpEnabled(!mSyncInProgress);
-//        }
-//        else {
-//            actionBar.setHomeButtonEnabled(true);
-//            actionBar.setDisplayHomeAsUpEnabled(false);
-//        }
-//    }
-//    
     /**
      * {@inheritDoc}
      */
@@ -1335,12 +1325,16 @@ OCFileListFragment.ContainerActivity, FileDetailFragment.ContainerActivity, OnNa
 
         } else {
             dismissLoadingDialog();
+            if (result.getCode() == ResultCode.INVALID_CHARACTER_IN_NAME) {
+                Toast.makeText(FileDisplayActivity.this, R.string.filename_forbidden_characters, Toast.LENGTH_LONG).show();
+            } else {
             try {
                 Toast msg = Toast.makeText(FileDisplayActivity.this, R.string.create_dir_fail_msg, Toast.LENGTH_LONG); 
                 msg.show();
 
             } catch (NotFoundException e) {
                 Log_OC.e(TAG, "Error while trying to show fail message " , e);
+            }
             }
         }
     }
@@ -1372,6 +1366,9 @@ OCFileListFragment.ContainerActivity, FileDetailFragment.ContainerActivity, OnNa
                 Toast msg = Toast.makeText(this, R.string.rename_local_fail_msg, Toast.LENGTH_LONG); 
                 msg.show();
                 // TODO throw again the new rename dialog
+            } if (result.getCode().equals(ResultCode.INVALID_CHARACTER_IN_NAME)) {
+                Toast msg = Toast.makeText(this, R.string.filename_forbidden_characters, Toast.LENGTH_LONG); 
+                msg.show();
             } else {
                 Toast msg = Toast.makeText(this, R.string.rename_server_fail_msg, Toast.LENGTH_LONG); 
                 msg.show();

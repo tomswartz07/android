@@ -33,35 +33,34 @@ import org.apache.jackrabbit.webdav.DavConstants;
 import org.apache.jackrabbit.webdav.MultiStatus;
 import org.apache.jackrabbit.webdav.client.methods.PropFindMethod;
 
-import com.owncloud.android.Log_OC;
-import com.owncloud.android.MainApp;
 import com.owncloud.android.R;
-import com.owncloud.android.authentication.AccountAuthenticator;
 import com.owncloud.android.authentication.AuthenticatorActivity;
 import com.owncloud.android.datamodel.FileDataStorageManager;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.db.DbHandler;
-import com.owncloud.android.network.OwnCloudClientUtils;
 import com.owncloud.android.operations.ChunkedUploadFileOperation;
 import com.owncloud.android.operations.CreateFolderOperation;
 import com.owncloud.android.operations.ExistenceCheckOperation;
-import com.owncloud.android.operations.RemoteOperation;
-import com.owncloud.android.operations.RemoteOperationResult;
+import com.owncloud.android.oc_framework.operations.RemoteOperation;
+import com.owncloud.android.oc_framework.operations.RemoteOperationResult;
 import com.owncloud.android.operations.UploadFileOperation;
-import com.owncloud.android.operations.RemoteOperationResult.ResultCode;
+import com.owncloud.android.oc_framework.operations.RemoteOperationResult.ResultCode;
+import com.owncloud.android.oc_framework.utils.OwnCloudVersion;
+import com.owncloud.android.oc_framework.network.webdav.OnDatatransferProgressListener;
+import com.owncloud.android.oc_framework.accounts.OwnCloudAccount;
+import com.owncloud.android.oc_framework.network.webdav.ChunkFromFileChannelRequestEntity;
+import com.owncloud.android.oc_framework.network.webdav.OwnCloudClientFactory;
+import com.owncloud.android.oc_framework.network.webdav.WebdavClient;
+import com.owncloud.android.oc_framework.network.webdav.WebdavEntry;
+import com.owncloud.android.oc_framework.network.webdav.WebdavUtils;
 import com.owncloud.android.ui.activity.FailedUploadActivity;
 import com.owncloud.android.ui.activity.FileActivity;
 import com.owncloud.android.ui.activity.FileDisplayActivity;
 import com.owncloud.android.ui.activity.InstantUploadActivity;
 import com.owncloud.android.ui.preview.PreviewImageActivity;
 import com.owncloud.android.ui.preview.PreviewImageFragment;
-import com.owncloud.android.utils.OwnCloudVersion;
-
-
-import eu.alefzero.webdav.OnDatatransferProgressListener;
-import eu.alefzero.webdav.WebdavEntry;
-import eu.alefzero.webdav.WebdavUtils;
-
+import com.owncloud.android.utils.DisplayUtils;
+import com.owncloud.android.utils.Log_OC;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -82,7 +81,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.RemoteViews;
 
 
-import eu.alefzero.webdav.WebdavClient;
 
 public class FileUploader extends Service implements OnDatatransferProgressListener {
 
@@ -261,8 +259,7 @@ public class FileUploader extends Service implements OnDatatransferProgressListe
             }
         }
 
-        OwnCloudVersion ocv = new OwnCloudVersion(AccountManager.get(this).getUserData(account,
-                AccountAuthenticator.KEY_OC_VERSION));
+        OwnCloudVersion ocv = new OwnCloudVersion(AccountManager.get(this).getUserData(account, OwnCloudAccount.Constants.KEY_OC_VERSION));
         boolean chunked = FileUploader.chunkedUploadIsSupported(ocv);
         AbstractList<String> requestedUploads = new Vector<String>();
         String uploadKey = null;
@@ -270,7 +267,9 @@ public class FileUploader extends Service implements OnDatatransferProgressListe
         try {
             for (int i = 0; i < files.length; i++) {
                 uploadKey = buildRemoteName(account, files[i].getRemotePath());
-                if (chunked) {
+                if (chunked
+                        && (new File(files[i].getStoragePath())).length() > ChunkedUploadFileOperation.CHUNK_SIZE)  // added to work around bug in servers 5.x 
+                {
                     newUpload = new ChunkedUploadFileOperation(account, files[i], isInstant, forceOverwrite,
                             localAction);
                 } else {
@@ -504,7 +503,7 @@ public class FileUploader extends Service implements OnDatatransferProgressListe
                 if (mUploadClient == null || !mLastAccount.equals(mCurrentUpload.getAccount())) {
                     mLastAccount = mCurrentUpload.getAccount();
                     mStorageManager = new FileDataStorageManager(mLastAccount, getContentResolver());
-                    mUploadClient = OwnCloudClientUtils.createOwnCloudClient(mLastAccount, getApplicationContext());
+                    mUploadClient = OwnCloudClientFactory.createOwnCloudClient(mLastAccount, getApplicationContext());
                 }
                 
                 /// check the existence of the parent folder for the file to upload
@@ -567,9 +566,9 @@ public class FileUploader extends Service implements OnDatatransferProgressListe
         RemoteOperation operation = new ExistenceCheckOperation(pathToGrant, this, false);
         RemoteOperationResult result = operation.execute(mUploadClient);
         if (!result.isSuccess() && result.getCode() == ResultCode.FILE_NOT_FOUND && mCurrentUpload.isRemoteFolderToBeCreated()) {
-            operation = new CreateFolderOperation(  pathToGrant,
-                                                    true,
-                                                    mStorageManager    );
+            operation = new CreateFolderOperation( pathToGrant,
+                    true,
+                    mStorageManager    );
             result = operation.execute(mUploadClient);
         }
         if (result.isSuccess()) {
@@ -719,7 +718,7 @@ public class FileUploader extends Service implements OnDatatransferProgressListe
     private void notifyUploadStart(UploadFileOperation upload) {
         // / create status notification with a progress bar
         mLastPercent = 0;
-        mNotification = new Notification(R.drawable.icon, getString(R.string.uploader_upload_in_progress_ticker),
+        mNotification = new Notification(DisplayUtils.getSeasonalIconId(), getString(R.string.uploader_upload_in_progress_ticker),
                 System.currentTimeMillis());
         mNotification.flags |= Notification.FLAG_ONGOING_EVENT;
         mDefaultNotificationContentView = mNotification.contentView;
@@ -728,7 +727,7 @@ public class FileUploader extends Service implements OnDatatransferProgressListe
         mNotification.contentView.setProgressBar(R.id.status_progress, 100, 0, false);
         mNotification.contentView.setTextViewText(R.id.status_text,
                 String.format(getString(R.string.uploader_upload_in_progress_content), 0, upload.getFileName()));
-        mNotification.contentView.setImageViewResource(R.id.status_icon, R.drawable.icon);
+        mNotification.contentView.setImageViewResource(R.id.status_icon, DisplayUtils.getSeasonalIconId());
         
         /// includes a pending intent in the notification showing the details view of the file
         Intent showDetailsIntent = new Intent(this, FileDisplayActivity.class);
@@ -815,7 +814,7 @@ public class FileUploader extends Service implements OnDatatransferProgressListe
 
             // / fail -> explicit failure notification
             mNotificationManager.cancel(R.string.uploader_upload_in_progress_ticker);
-            Notification finalNotification = new Notification(R.drawable.icon,
+            Notification finalNotification = new Notification(DisplayUtils.getSeasonalIconId(),
                     getString(R.string.uploader_upload_failed_ticker), System.currentTimeMillis());
             finalNotification.flags |= Notification.FLAG_AUTO_CANCEL;
             String content = null;
@@ -823,7 +822,8 @@ public class FileUploader extends Service implements OnDatatransferProgressListe
             boolean needsToUpdateCredentials = (uploadResult.getCode() == ResultCode.UNAUTHORIZED ||
                     //(uploadResult.isTemporalRedirection() && uploadResult.isIdPRedirection() && 
                     (uploadResult.isIdPRedirection() &&
-                            MainApp.getAuthTokenTypeSamlSessionCookie().equals(mUploadClient.getAuthTokenType())));
+                            mUploadClient.getCredentials() == null));
+                            //MainApp.getAuthTokenTypeSamlSessionCookie().equals(mUploadClient.getAuthTokenType())));
             if (needsToUpdateCredentials) {
                 // let the user update credentials with one click
                 Intent updateAccountCredentials = new Intent(this, AuthenticatorActivity.class);
