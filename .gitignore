@@ -15,6 +15,7 @@ target/
 
 # Local configuration files (sdk path, etc)
 local.properties
+secure.properties
 oc_workaround/local.properties
 oc_framework/local.properties
 oc_framework-test-project/local.properties
