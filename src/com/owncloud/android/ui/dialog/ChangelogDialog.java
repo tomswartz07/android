@@ -24,7 +24,7 @@ import android.os.Bundle;
 import android.webkit.WebView;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.utils.DisplayUtils;
 
 

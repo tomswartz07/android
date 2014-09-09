@@ -20,7 +20,7 @@ package com.owncloud.android.ui.fragment;
 import java.io.File;
 import java.util.ArrayList;
 
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.datamodel.FileDataStorageManager;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.files.FileMenuFilter;

@@ -27,7 +27,7 @@ import android.support.v4.app.FragmentTransaction;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.utils.DisplayUtils;
 
 

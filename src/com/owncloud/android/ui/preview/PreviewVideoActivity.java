@@ -17,7 +17,7 @@
 
 package com.owncloud.android.ui.preview;
 
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.media.MediaService;
 import com.owncloud.android.ui.activity.FileActivity;

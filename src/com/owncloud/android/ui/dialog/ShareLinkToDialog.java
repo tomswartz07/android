@@ -40,7 +40,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.ui.activity.ComponentsGetter;
 import com.owncloud.android.ui.activity.CopyToClipboardActivity;

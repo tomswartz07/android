@@ -52,7 +52,7 @@ import com.owncloud.android.lib.common.accounts.AccountUtils.Constants;
 import com.owncloud.android.utils.DisplayUtils;
 import com.owncloud.android.utils.Log_OC;
 import com.owncloud.android.MainApp;
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 
 
 public class AccountSelectActivity extends SherlockListActivity implements

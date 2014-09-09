@@ -23,7 +23,7 @@ package com.owncloud.android.ui.dialog;
  *  Triggers the rename operation. 
  */
 import com.actionbarsherlock.app.SherlockDialogFragment;
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.lib.resources.files.FileUtils;
 import com.owncloud.android.ui.activity.ComponentsGetter;

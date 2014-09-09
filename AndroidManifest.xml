@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- 
+<!--
   ownCloud Android client application
 
   Copyright (C) 2012  Bartek Przybylski
@@ -17,7 +17,7 @@
   You should have received a copy of the GNU General Public License
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
  -->
-<manifest package="com.owncloud.android"
+<manifest package="com.pennmanor.android"
     android:versionCode="10500800"
     android:versionName="1.5.8" xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -35,7 +35,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
-    
+
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
@@ -44,12 +44,12 @@
     </uses-permission>
 
     <application
-        android:name=".MainApp"
+        android:name="com.owncloud.android.MainApp"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@style/Theme.ownCloud"> 
+        android:theme="@style/Theme.ownCloud">
         <activity
-            android:name=".ui.activity.FileDisplayActivity"
+            android:name="com.owncloud.android.ui.activity.FileDisplayActivity"
             android:label="@string/app_name"
             >
             <intent-filter>
@@ -57,9 +57,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.UploadFilesActivity">
+        <activity android:name="com.owncloud.android.ui.activity.UploadFilesActivity">
         </activity>
-        <activity android:name=".ui.activity.Uploader" >
+        <activity android:name="com.owncloud.android.ui.activity.Uploader" >
             <intent-filter>
                 <action android:name="android.intent.action.SEND" >
                 </action>
@@ -83,25 +83,25 @@
 			</intent-filter>
         </activity>
         <activity
-            android:name=".ui.activity.Preferences"
+            android:name="com.owncloud.android.ui.activity.Preferences"
             android:theme="@style/Theme.ownCloud" >
         </activity>
-        <activity android:name=".ui.activity.PreferencesNewSessionewSession" >
+        <activity android:name="com.owncloud.android.ui.activity.PreferencesNewSessionewSession" >
         </activity>
-        
-        <activity	
-            android:name=".ui.preview.PreviewImageActivity" 
+
+        <activity
+            android:name="com.owncloud.android.ui.preview.PreviewImageActivity"
             />
-		        
-        <activity	
-            android:name=".ui.preview.PreviewVideoActivity"
+
+        <activity
+            android:name="com.owncloud.android.ui.preview.PreviewVideoActivity"
 			android:label="@string/app_name"
-			android:theme="@style/Theme.ownCloud.Fullscreen" 
+			android:theme="@style/Theme.ownCloud.Fullscreen"
 			>
-		</activity>        
+		</activity>
 
         <service
-            android:name=".authentication.AccountAuthenticatorService"
+            android:name="com.owncloud.android.authentication.AccountAuthenticatorService"
             android:exported="true">
             <intent-filter  android:priority="100">
                 <action android:name="android.accounts.AccountAuthenticator" />
@@ -112,8 +112,8 @@
                 android:resource="@xml/authenticator" />
         </service>
         <service
-            android:name=".syncadapter.FileSyncService"
-            android:exported="true" 
+            android:name="com.owncloud.android.syncadapter.FileSyncService"
+            android:exported="true"
             >
             <intent-filter>
                 <action android:name="android.content.SyncAdapter" />
@@ -125,7 +125,7 @@
         </service>
 
         <provider
-            android:name=".providers.FileContentProvider"
+            android:name="com.owncloud.android.providers.FileContentProvider"
             android:authorities="@string/authority"
             android:enabled="true"
             android:exported="false"
@@ -134,9 +134,9 @@
         </provider>
 
         <activity
-            android:name=".authentication.AuthenticatorActivity"
+            android:name="com.owncloud.android.authentication.AuthenticatorActivity"
             android:exported="true"
-            android:theme="@style/Theme.ownCloud.noActionBar" 
+            android:theme="@style/Theme.ownCloud.noActionBar"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -150,24 +150,24 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".services.OperationsService" />
-        <service android:name=".files.services.FileDownloader" />
-        <service android:name=".files.services.FileUploader" />
-        <service android:name=".media.MediaService" />
-        
-        <activity android:name=".ui.activity.PinCodeActivity" />
-        <activity android:name=".ui.activity.AccountSelectActivity" android:uiOptions="none" android:label="@string/prefs_accounts"></activity>
-        <activity android:name=".ui.activity.ConflictsResolveActivity"/>
-        <activity android:name=".ui.activity.GenericExplanationActivity"/>
-        <activity android:name=".ui.activity.ErrorsWhileCopyingHandlerActivity"/>
-        
-        <activity android:name=".ui.activity.LogHistoryActivity"/>
-        
-        <receiver android:name=".files.InstantUploadBroadcastReceiver">
+        <service android:name="com.owncloud.android.services.OperationsService" />
+        <service android:name="com.owncloud.android.files.services.FileDownloader" />
+        <service android:name="com.owncloud.android.files.services.FileUploader" />
+        <service android:name="com.owncloud.android.media.MediaService" />
+
+        <activity android:name="com.owncloud.android.ui.activity.PinCodeActivity" />
+        <activity android:name="com.owncloud.android.ui.activity.AccountSelectActivity" android:uiOptions="none" android:label="@string/prefs_accounts"></activity>
+        <activity android:name="com.owncloud.android.ui.activity.ConflictsResolveActivity"/>
+        <activity android:name="com.owncloud.android.ui.activity.GenericExplanationActivity"/>
+        <activity android:name="com.owncloud.android.ui.activity.ErrorsWhileCopyingHandlerActivity"/>
+
+        <activity android:name="com.owncloud.android.ui.activity.LogHistoryActivity"/>
+
+        <receiver android:name="com.owncloud.android.files.InstantUploadBroadcastReceiver">
             <intent-filter>
                 <!-- unofficially supported by many Android phones but not by HTC devices: -->
                 <action android:name="com.android.camera.NEW_PICTURE" />
-                <!-- officially supported since Android 4.0 (SDK 14, works even for HTC devices): --> 
+                <!-- officially supported since Android 4.0 (SDK 14, works even for HTC devices): -->
                 <action android:name="android.hardware.action.NEW_PICTURE" />
                 <data android:mimeType="image/*" />
             </intent-filter>
@@ -179,18 +179,18 @@
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".files.BootupBroadcastReceiver">
+        <receiver android:name="com.owncloud.android.files.BootupBroadcastReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
-        <service android:name=".services.observer.FileObserverService"/>
-        
-        <activity 
-            android:name=".ui.activity.CopyToClipboardActivity" 
+        <service android:name="com.owncloud.android.services.observer.FileObserverService"/>
+
+        <activity
+            android:name="com.owncloud.android.ui.activity.CopyToClipboardActivity"
            	android:label="@string/copy_link"
            	android:icon="@drawable/copy_link" />
-        
+
     </application>
 
 </manifest>

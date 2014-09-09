@@ -32,7 +32,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.utils.DisplayUtils;
 
 

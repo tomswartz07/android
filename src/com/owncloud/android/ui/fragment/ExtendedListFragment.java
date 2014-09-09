@@ -19,7 +19,7 @@
 package com.owncloud.android.ui.fragment;
 
 import com.actionbarsherlock.app.SherlockFragment;
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.ui.ExtendedListView;
 import com.owncloud.android.utils.Log_OC;
 

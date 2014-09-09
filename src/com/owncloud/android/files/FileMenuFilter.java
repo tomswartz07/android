@@ -25,7 +25,7 @@ import android.content.Context;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.files.services.FileDownloader;
 import com.owncloud.android.files.services.FileDownloader.FileDownloaderBinder;

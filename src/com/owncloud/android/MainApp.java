@@ -18,7 +18,7 @@ package com.owncloud.android;
 
 import com.owncloud.android.lib.common.OwnCloudClientManagerFactory;
 import com.owncloud.android.lib.common.OwnCloudClientManagerFactory.Policy;
-
+import com.pennmanor.android.R;
 import android.app.Application;
 import android.content.Context;
 /**

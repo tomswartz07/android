@@ -27,7 +27,7 @@ import android.support.v4.app.DialogFragment;
 import android.webkit.MimeTypeMap;
 import android.widget.Toast;
 
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.files.services.FileDownloader.FileDownloaderBinder;
 import com.owncloud.android.files.services.FileUploader.FileUploaderBinder;

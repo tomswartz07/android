@@ -24,7 +24,7 @@ import java.util.Map;
 
 import javax.security.auth.x500.X500Principal;
 
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.ui.dialog.SslUntrustedCertDialog;
 
 import android.view.View;

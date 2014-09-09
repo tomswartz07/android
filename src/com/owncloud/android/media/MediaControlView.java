@@ -40,7 +40,7 @@ import android.widget.TextView;
 import java.util.Formatter;
 import java.util.Locale;
 
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 
 
 /**

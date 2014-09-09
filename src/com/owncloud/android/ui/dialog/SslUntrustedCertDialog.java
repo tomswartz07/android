@@ -33,7 +33,7 @@ import android.webkit.SslErrorHandler;
 import android.widget.Button;
 
 import com.actionbarsherlock.app.SherlockDialogFragment;
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.lib.common.network.CertificateCombinedException;
 import com.owncloud.android.lib.common.network.NetworkUtils;
 import com.owncloud.android.ui.adapter.CertificateCombinedExceptionViewAdapter;

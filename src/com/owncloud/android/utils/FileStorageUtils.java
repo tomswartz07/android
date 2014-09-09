@@ -20,7 +20,7 @@ package com.owncloud.android.utils;
 import java.io.File;
 
 import com.owncloud.android.MainApp;
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.datamodel.OCFile;
 import com.owncloud.android.lib.resources.files.RemoteFile;
 

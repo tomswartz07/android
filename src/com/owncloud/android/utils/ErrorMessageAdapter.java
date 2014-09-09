@@ -23,7 +23,7 @@ import java.net.SocketTimeoutException;
 import org.apache.commons.httpclient.ConnectTimeoutException;
 import android.content.res.Resources;
 
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.lib.common.operations.RemoteOperation;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult;
 import com.owncloud.android.lib.common.operations.RemoteOperationResult.ResultCode;

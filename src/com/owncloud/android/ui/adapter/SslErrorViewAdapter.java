@@ -16,7 +16,7 @@
  */
 package com.owncloud.android.ui.adapter;
 
-import com.owncloud.android.R;
+import com.pennmanor.android.R;
 import com.owncloud.android.ui.dialog.SslUntrustedCertDialog;
 import android.net.http.SslError;
 import android.view.View;
